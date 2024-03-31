@@ -24,4 +24,10 @@ app.use(express.static("public"));
 // Performing CRUD operations on user cookies
 app.use(cookieParser());
 
+// routes import
+import userRouter from "./routes/user.routes.js";
+
+// routes declarations
+app.use("/api/v1/users", userRouter); // standard practice routes https://localhost:8000/api/vi/users/register
+
 export { app };
