@@ -6,11 +6,9 @@ const asyncHandler = (requestHandler) => {
   };
 };
 
-export { asyncHandler };
-
 // The function (fn) is passed on to other function
 // const asyncHandler = (fn) => {
-//   async (req, res, next) => {
+//   return async (req, res, next) => {
 //     try {
 //       await fn(req, res, next);
 //     } catch (error) {
@@ -21,3 +19,5 @@ export { asyncHandler };
 //     }
 //   };
 // };
+
+export { asyncHandler };
