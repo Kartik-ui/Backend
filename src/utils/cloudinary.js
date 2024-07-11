@@ -28,4 +28,16 @@ const uploadOnCloudinary = async (localFilePath) => {
   }
 };
 
-export { uploadOnCloudinary };
+const deleteOnCloudinary = async (publicId) => {
+  try {
+    await cloudinary.uploader.destroy(publicId);
+  } catch (error) {
+    throw new ApiError(
+      500,
+      "Error while deleting old avatar from Cloudinary",
+      error
+    );
+  }
+};
+
+export { deleteOnCloudinary, uploadOnCloudinary };
