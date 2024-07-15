@@ -28,9 +28,10 @@ const uploadOnCloudinary = async (localFilePath) => {
   }
 };
 
-const deleteOnCloudinary = async (publicId) => {
+const deleteOnCloudinary = async (fileUrl, fileType) => {
   try {
-    await cloudinary.uploader.destroy(publicId);
+    const publicId = fileUrl.split("/").pop().split(".")?.[0];
+    await cloudinary.uploader.destroy(publicId, { resource_type: fileType });
   } catch (error) {
     throw new ApiError(
       500,

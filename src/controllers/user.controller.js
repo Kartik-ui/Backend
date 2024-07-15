@@ -309,8 +309,7 @@ const updateUserAvatar = asyncHandler(async (req, res) => {
   const modifiedUser = await user.save({ validateBeforeSave: false });
 
   if (oldAvatarUrl) {
-    const publicId = oldAvatarUrl.split("/").pop().split(".")?.[0];
-    await deleteOnCloudinary(publicId);
+    await deleteOnCloudinary(oldAvatarUrl, "image");
   }
 
   return res
@@ -336,8 +335,7 @@ const updateUserCoverImage = asyncHandler(async (req, res) => {
   const modifiedUser = await user.save({ validateBeforeSave: false });
 
   if (oldCoverImageUrl) {
-    const publicId = oldCoverImageUrl.split("/").pop().split(".")?.[0];
-    await deleteOnCloudinary(publicId);
+    await deleteOnCloudinary(oldCoverImageUrl, "image");
   }
 
   return res

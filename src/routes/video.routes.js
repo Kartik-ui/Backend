@@ -3,6 +3,7 @@ import {
   deleteVideo,
   getAllVideos,
   getVideoById,
+  incrementViews,
   publishAVideo,
   togglePublishStatus,
   updateVideo,
@@ -37,5 +38,7 @@ router
   .patch(upload.single("thumbnail"), updateVideo);
 
 router.route("/toggle/publish/:videoId").patch(togglePublishStatus);
+
+router.route("/views/:videoId").patch(incrementViews);
 
 export default router;
