@@ -6,8 +6,14 @@ import { asyncHandler } from "../utils/asyncHandler.js";
 
 const createPlaylist = asyncHandler(async (req, res) => {
   const { name, description } = req.body;
-
   //TODO: create playlist
+  if (!(name && description))
+    throw new ApiError(400, "Name and Description are required");
+
+  const playList = await Playlist.create({
+    name,
+    description,
+  });
 });
 
 const getUserPlaylists = asyncHandler(async (req, res) => {
@@ -41,11 +47,11 @@ const updatePlaylist = asyncHandler(async (req, res) => {
 });
 
 export {
-  createPlaylist,
-  getUserPlaylists,
-  getPlaylistById,
   addVideoToPlaylist,
-  removeVideoFromPlaylist,
+  createPlaylist,
   deletePlaylist,
+  getPlaylistById,
+  getUserPlaylists,
+  removeVideoFromPlaylist,
   updatePlaylist,
 };
