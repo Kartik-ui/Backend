@@ -11,6 +11,12 @@ const createPlaylist = asyncHandler(async (req, res) => {
   if (!(name && description))
     throw new ApiError(400, "Name and Description are required");
 
+  const existingPlaylist = await Playlist.findOne({
+    $or: [{ name }, { description }],
+  });
+
+  if (existingPlaylist) throw new ApiError(400, "Playlist already exist");
+
   const playList = await Playlist.create({
     name,
     description,
@@ -110,8 +116,8 @@ const removeVideoFromPlaylist = asyncHandler(async (req, res) => {
 });
 
 const deletePlaylist = asyncHandler(async (req, res) => {
-  const { playlistId } = req.params;
   // TODO: delete playlist
+  const { playlistId } = req.params;
   if (!isValidObjectId(playlistId))
     throw new ApiError(400, "Invalid playlist Id");
 
@@ -144,6 +150,8 @@ const updatePlaylist = asyncHandler(async (req, res) => {
     },
     { new: true }
   );
+
+  if (!modifiedPlaylist) throw new ApiError(404, "No playlist found to update");
 
   return res
     .status(200)
