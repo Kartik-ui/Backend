@@ -62,7 +62,7 @@ const getAllVideos = asyncHandler(async (req, res) => {
 
   const result = await Video.aggregatePaginate(videoAggregate, options);
 
-  if (result.videos.length === 0 && userId)
+  if (result.videos.length === 0)
     return res.status(200).json(new ApiResponse(200, [], "No videos found"));
 
   return res
